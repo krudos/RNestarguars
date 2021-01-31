@@ -21,21 +21,21 @@ export const SearchScreen: React.FC<SearchScreenProps> = () => {
   }
 
   return (
-    <FlatList
-      keyboardShouldPersistTaps="always"
-      ListHeaderComponent={
-        <Searchbar
-          autoCorrect={false}
-          autoCapitalize="none"
-          placeholder="Search"
-          onChangeText={(value) => setSearchQuery(value)}
-          value={searchQuery}
-        />
-      }
-      ListEmptyComponent={EmptyComponent}
-      data={data}
-      renderItem={SW_Item}
-      keyExtractor={(item) => item.id.toString()}
-    />
+    <>
+      <Searchbar
+        autoCorrect={false}
+        autoCapitalize="none"
+        placeholder="Search"
+        onChangeText={(value) => setSearchQuery(value)}
+        value={searchQuery}
+      />
+      <FlatList
+        keyboardShouldPersistTaps="always"
+        ListEmptyComponent={EmptyComponent}
+        data={data}
+        renderItem={SW_Item}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </>
   );
 };

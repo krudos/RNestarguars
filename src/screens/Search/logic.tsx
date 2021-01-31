@@ -4,7 +4,7 @@ import { useShowDetails } from '../../navigation';
 import { useQuery } from '@apollo/client';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { ListItem } from '../../components/ListItem';
-import { Paragraph, Title } from 'react-native-paper';
+import { Paragraph, Title, Card, Button } from 'react-native-paper';
 import { useStyles } from '../../styles';
 
 export const useSearchScreen = () => {
@@ -39,9 +39,16 @@ export const useSearchScreen = () => {
   }, [styles, loading]);
 
   const SW_Item = ({ item }: { item: SW_Entity }) => (
-    <ListItem onPress={() => showDetails(item)}>
+    <ListItem>
       <Title>{item.name}</Title>
       <Paragraph>{item.__typename}</Paragraph>
+      <Button
+        icon="chevron-right"
+        mode="contained"
+        onPress={() => showDetails(item)}
+        color={'red'}>
+        Details
+      </Button>
     </ListItem>
   );
 

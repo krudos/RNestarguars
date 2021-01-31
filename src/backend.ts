@@ -6,28 +6,71 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export interface SW_Planet {
-  __typename: 'Planet';
-  id: number;
+export interface SW_Base {
+  id: string;
   name: string;
-  population: number;
 }
 
-export interface SW_Person {
-  __typename: 'Person';
-  id: number;
+export interface Film {
+  id: string;
+  title: string;
+  releaseDate: string;
+}
+
+export interface SW_Planet {
+  __typename: 'Planet';
+  id: string;
   name: string;
-  height: number;
+  population: number;
+  climate: string;
+  orbitalPeriod: string;
+  terrain: string;
+  gravity: string;
+  rotationPeriod: string;
+  surfaceWater: string;
+  diameter: string;
+  residents: SW_Base[];
+  films: Film[];
 }
 
 export interface SW_Starship {
   __typename: 'Starship';
-  id: number;
+  id: string;
   name: string;
   costInCredits: number;
+  hyperdriveRating: string;
+  passengers: string;
+  cargoCapacity: string;
+  crew: string;
+  length: string;
+  manufacturer: string;
+  maxAtmospheringSpeed: string;
+  mglt: string;
+  consumables: string;
+  class: string;
+  films: Film[];
+  pilots: SW_Base[];
 }
 
-export type SW_Entity = SW_Planet | SW_Person | SW_Starship;
+export interface SW_Person {
+  __typename: 'Person';
+  id: string;
+  name: string;
+  height: number;
+  birthYear: string;
+  mass: string;
+  skinColor: string;
+  gender: string;
+  eyeColor: string;
+  hairColor: string;
+  homeworld: SW_Base;
+  species: SW_Base[];
+  vehicles: SW_Base[];
+  starships: SW_Base[];
+  films: Film[];
+}
+
+export type SW_Entity = SW_Planet | SW_Starship | SW_Person;
 
 export const SW_SEARCH_ENTITIES_QUERY = gql`
   query SW_SEARCH_ENTITIES_DATASET($filter: String!) {
