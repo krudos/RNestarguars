@@ -1,10 +1,11 @@
 import { StackScreenProps } from '@react-navigation/stack';
 
 import { useNavigation } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { SW_Entity } from '../backend';
 type RootStackParamList = {
   SearchScreen: undefined;
-  DetailScreen: { userId: string };
+  DetailScreen: { item: SW_Entity };
 };
 
 export type SearchScreenProps = StackScreenProps<
@@ -19,8 +20,7 @@ export type DetailScreenProps = StackScreenProps<
 
 export const useShowDetails = () => {
   const navigation = useNavigation();
-  const showDetails = useCallback(() => navigation.navigate('DetailScreen'), [
-    navigation,
-  ]);
+  const showDetails = (value: SW_Entity) =>
+    navigation.navigate('DetailScreen', { name: 'xx', item: value });
   return { showDetails };
 };

@@ -1,35 +1,69 @@
 import React from 'react';
-import { Button, FlatList, Text, View } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { ActivityIndicator, Button, FlatList, View, Text } from 'react-native';
+import { Card, Paragraph, Searchbar, Title } from 'react-native-paper';
 import { SearchScreenProps, useShowDetails } from '../../navigation';
 import { useQuery } from '@apollo/client';
-import { QQ, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
+import { SW_Entity, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
+
+import { orderBy } from 'lodash';
 
 export const SearchScreen: React.FC<SearchScreenProps> = ({}) => {
   const { showDetails } = useShowDetails();
 
   const [searchQuery, setSearchQuery] = React.useState('');
 
-  const { loading, error, data, refetch } = useQuery(SW_SEARCH_ENTITIES_QUERY, {
+  const [data, setData] = React.useState([] as SW_Entity[]);
+
+  const { loading, error, refetch } = useQuery(SW_SEARCH_ENTITIES_QUERY, {
     fetchPolicy: 'cache-and-network',
-    variables: { filter: searchQuery },
+
+    variables: { filter: searchQuery.trim() },
+    onCompleted: (res) => {
+      const result = res.planets.concat(res.starships).concat(res.persons);
+      //orderBy(result, ['name'], ['asc'])
+      setData(result);
+    },
   });
 
-  //const { loading, error, data } = useQuery(QQ);
-
-  console.log('data', data);
-  //  if (loading) return 'Loading...';
-  //   if (error) return `Error! ${error.message}`;
-  return (
-    <View>
-      <Searchbar
-        placeholder="Search"
-        onChangeText={(value) => setSearchQuery(value)}
-        value={searchQuery}
+  if (error) {
+    return (
+      <Button
+        title="Retry"
+        onPress={() => {
+          setSearchQuery('');
+          refetch();
+        }}
       />
-      <Text> hola</Text>
-      <Button title="Go to Details" onPress={showDetails} />
-    </View>
+    );
+  }
+  return (
+    <FlatList
+      keyboardShouldPersistTaps="always"
+      ListHeaderComponent={
+        <Searchbar
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder="Search"
+          onChangeText={(value) => setSearchQuery(value)}
+          value={searchQuery}
+        />
+      }
+      ListEmptyComponent={() => {
+        if (loading) {
+          return <ActivityIndicator />;
+        }
+        return <Text>No result</Text>;
+      }}
+      data={data}
+      renderItem={({ item }) => (
+        <Card onPress={() => showDetails(item)}>
+          <Card.Content>
+            <Title>{item.name}</Title>
+            <Paragraph>Card content</Paragraph>
+          </Card.Content>
+        </Card>
+      )}
+      keyExtractor={(item) => item.id.toString()}
+    />
   );
 };
-//<FlatList data={} />;
