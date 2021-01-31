@@ -1,41 +1,25 @@
 import React from 'react';
-import { ActivityIndicator, Button, FlatList, View, Text } from 'react-native';
-import { Card, Paragraph, Searchbar, Title } from 'react-native-paper';
-import { SearchScreenProps, useShowDetails } from '../../navigation';
-import { useQuery } from '@apollo/client';
-import { SW_Entity, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
+import { FlatList } from 'react-native';
+import { Searchbar } from 'react-native-paper';
+import { SearchScreenProps } from '../../navigation';
+import { RetryComponent } from '../../components/Retry';
+import { useSearchScreen } from './logic';
 
-import { orderBy } from 'lodash';
-
-export const SearchScreen: React.FC<SearchScreenProps> = ({}) => {
-  const { showDetails } = useShowDetails();
-
-  const [searchQuery, setSearchQuery] = React.useState('');
-
-  const [data, setData] = React.useState([] as SW_Entity[]);
-
-  const { loading, error, refetch } = useQuery(SW_SEARCH_ENTITIES_QUERY, {
-    fetchPolicy: 'cache-and-network',
-
-    variables: { filter: searchQuery.trim() },
-    onCompleted: (res) => {
-      const result = res.planets.concat(res.starships).concat(res.persons);
-      //orderBy(result, ['name'], ['asc'])
-      setData(result);
-    },
-  });
+export const SearchScreen: React.FC<SearchScreenProps> = () => {
+  const {
+    setSearchQuery,
+    searchQuery,
+    EmptyComponent,
+    data,
+    SW_Item,
+    error,
+    retry,
+  } = useSearchScreen();
 
   if (error) {
-    return (
-      <Button
-        title="Retry"
-        onPress={() => {
-          setSearchQuery('');
-          refetch();
-        }}
-      />
-    );
+    return <RetryComponent onPress={retry} />;
   }
+
   return (
     <FlatList
       keyboardShouldPersistTaps="always"
@@ -48,21 +32,9 @@ export const SearchScreen: React.FC<SearchScreenProps> = ({}) => {
           value={searchQuery}
         />
       }
-      ListEmptyComponent={() => {
-        if (loading) {
-          return <ActivityIndicator />;
-        }
-        return <Text>No result</Text>;
-      }}
+      ListEmptyComponent={EmptyComponent}
       data={data}
-      renderItem={({ item }) => (
-        <Card onPress={() => showDetails(item)}>
-          <Card.Content>
-            <Title>{item.name}</Title>
-            <Paragraph>Card content</Paragraph>
-          </Card.Content>
-        </Card>
-      )}
+      renderItem={SW_Item}
       keyExtractor={(item) => item.id.toString()}
     />
   );

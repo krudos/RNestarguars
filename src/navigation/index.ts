@@ -1,11 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack';
 
 import { useNavigation } from '@react-navigation/native';
-import { useCallback, useMemo } from 'react';
-import { SW_Entity } from '../backend';
+import { SW_Entity, SW_Planet } from '../backend';
 type RootStackParamList = {
   SearchScreen: undefined;
-  DetailScreen: { item: SW_Entity };
+  DetailScreen: { item: SW_Entity | SW_Planet };
 };
 
 export type SearchScreenProps = StackScreenProps<

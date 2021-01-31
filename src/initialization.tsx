@@ -17,8 +17,16 @@ const RootComponent = () => {
       <ApolloProvider client={apolloClient}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="SearchScreen">
-            <Stack.Screen name="SearchScreen" component={SearchScreen} />
-            <Stack.Screen name="DetailScreen" component={DetailScreen} />
+            <Stack.Screen
+              name="SearchScreen"
+              component={SearchScreen}
+              options={{ title: 'Home' }}
+            />
+            <Stack.Screen
+              name="DetailScreen"
+              component={DetailScreen}
+              options={{ title: 'Details' }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </ApolloProvider>
