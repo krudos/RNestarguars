@@ -1,7 +1,7 @@
 # RNestarguars
 
-##Getting Started
-###install dependencies
+##Getting Started  
+###install dependencies. 
 ```
 yarn install
 ```
