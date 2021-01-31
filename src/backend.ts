@@ -6,21 +6,24 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export interface SW_Base {
+export interface SW_Planet {
+  __typename: 'Planet';
   id: number;
   name: string;
-  __typename: string;
-}
-
-export interface SW_Planet extends SW_Base {
   population: number;
 }
 
-export interface SW_Person extends SW_Base {
+export interface SW_Person {
+  __typename: 'Person';
+  id: number;
+  name: string;
   height: number;
 }
 
-export interface SW_Starship extends SW_Base {
+export interface SW_Starship {
+  __typename: 'Starship';
+  id: number;
+  name: string;
   costInCredits: number;
 }
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { SW_Entity, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
+import { SW_Entity, SW_Planet, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
 import { useShowDetails } from '../../navigation';
 import { useQuery } from '@apollo/client';
 import { ActivityIndicator, Text, View } from 'react-native';
