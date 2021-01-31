@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { ScrollView, Text } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { ScrollView } from 'react-native';
 import { Button, Paragraph, Title } from 'react-native-paper';
 import { DetailScreenProps } from '../../navigation';
 import { Film, SW_Base, SW_Entity } from '../../backend';
@@ -117,22 +117,12 @@ const useDetailScreen = (item: SW_Entity) => {
 
   return { details };
 };
-export const DetailScreen: React.FC<DetailScreenProps> = ({
-  route,
-  navigation,
-}) => {
+export const DetailScreen: React.FC<DetailScreenProps> = ({ route }) => {
   const { item } = route.params;
   const { details } = useDetailScreen(item);
 
   return (
     <ListItem>
-      <Button
-        icon="arrow-left"
-        mode="contained"
-        onPress={() => navigation.goBack()}
-        color={'blue'}>
-        Home
-      </Button>
       <Title>{item.name}</Title>
       {details}
     </ListItem>

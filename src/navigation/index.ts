@@ -20,6 +20,6 @@ export type DetailScreenProps = StackScreenProps<
 export const useShowDetails = () => {
   const navigation = useNavigation();
   const showDetails = (value: SW_Entity) =>
-    navigation.navigate('DetailScreen', { name: 'xx', item: value });
+    navigation.navigate('DetailScreen', { item: value });
   return { showDetails };
 };

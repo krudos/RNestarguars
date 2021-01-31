@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
-import { SW_Entity, SW_Planet, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
+import { SW_Entity, SW_SEARCH_ENTITIES_QUERY } from '../../backend';
 import { useShowDetails } from '../../navigation';
 import { useQuery } from '@apollo/client';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { ListItem } from '../../components/ListItem';
-import { Paragraph, Title, Card, Button } from 'react-native-paper';
+import { Paragraph, Title, Button } from 'react-native-paper';
 import { useStyles } from '../../styles';
 
 export const useSearchScreen = () => {
