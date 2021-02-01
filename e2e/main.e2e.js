@@ -18,7 +18,7 @@ describe('RNestarguars', () => {
     await expect(element(by.text('Person'))).toBeVisible();
   });
 
-  it.only('search for amidala and go to details', async () => {
+  it('search for amidala and go to details', async () => {
     await expect(element(by.id('searchBar'))).toBeVisible();
     await element(by.id('searchBar')).typeText('amidala');
     await expect(element(by.text('Padmé Amidala'))).toBeVisible();
