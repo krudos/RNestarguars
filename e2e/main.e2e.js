@@ -1,3 +1,5 @@
+import { expect, device, element, by } from 'detox';
+
 describe('RNestarguars', () => {
   beforeAll(async () => {
     await device.launchApp();
