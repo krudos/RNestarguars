@@ -10,6 +10,7 @@ export const useStyles = () => {
           justifyContent: 'center',
           alignItems: 'center',
         },
+        alignCenter: { alignItems: 'center' },
       }),
     [],
   );

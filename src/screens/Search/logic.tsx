@@ -43,6 +43,7 @@ export const useSearchScreen = () => {
       <Title>{item.name}</Title>
       <Paragraph>{item.__typename}</Paragraph>
       <Button
+        testID={'detailsButton'}
         icon="chevron-right"
         mode="contained"
         onPress={() => showDetails(item)}

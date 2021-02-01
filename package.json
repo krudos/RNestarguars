@@ -7,6 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "e2e:test": "detox test -c ios",
+    "e2e:build": "detox build -c ios",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "iphone": "react-native run-ios --simulator 'iPhone 8'",
     "metro": "react-native start --reset-cache"

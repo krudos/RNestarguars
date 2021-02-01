@@ -4,11 +4,16 @@
 
 import 'react-native';
 import React from 'react';
-import App from '../App';
+import { Text } from 'react-native';
+import { ListItem } from './ListItem';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
-  renderer.create(<App />);
+  renderer.create(
+    <ListItem>
+      <Text>details</Text>
+    </ListItem>,
+  );
 });

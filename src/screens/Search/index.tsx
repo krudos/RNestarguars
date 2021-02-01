@@ -23,6 +23,7 @@ export const SearchScreen: React.FC<SearchScreenProps> = () => {
   return (
     <>
       <Searchbar
+        testID="searchBar"
         autoCorrect={false}
         autoCapitalize="none"
         placeholder="Search"

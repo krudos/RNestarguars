@@ -4,9 +4,10 @@
   "configurations": {
     "ios": {
       "type": "ios.simulator",
-      "binaryPath": "SPECIFY_PATH_TO_YOUR_APP_BINARY",
+      "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/RNestarguars.app",
+      "build": "xcodebuild -workspace ios/RNestarguars.xcworkspace -configuration release -scheme RNestarguars -sdk iphonesimulator -derivedDataPath ios/build",
       "device": {
-        "type": "iPhone 11"
+        "type": "iPhone 8"
       }
     },
     "android": {

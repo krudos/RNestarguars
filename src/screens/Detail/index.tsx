@@ -4,6 +4,7 @@ import { Button, Paragraph, Title } from 'react-native-paper';
 import { DetailScreenProps } from '../../navigation';
 import { Film, SW_Base, SW_Entity } from '../../backend';
 import { ListItem } from '../../components/ListItem';
+import { useStyles } from '../../styles';
 
 const RenderFilms = (films: Film[]) => {
   return films.length > 0 ? (
@@ -30,11 +31,12 @@ const RenderSW_Base = (title: string, baseArray: SW_Base[]) => {
 };
 
 const useDetailScreen = (item: SW_Entity) => {
+  const styles = useStyles();
   const details = useMemo(() => {
     switch (item.__typename) {
       case 'Planet':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.alignCenter}>
             {item.population && (
               <Paragraph>Population: {item.population}</Paragraph>
             )}
@@ -57,7 +59,7 @@ const useDetailScreen = (item: SW_Entity) => {
         );
       case 'Starship':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.alignCenter}>
             {item.costInCredits && (
               <Paragraph>Cost in credits: {item.costInCredits}</Paragraph>
             )}
@@ -91,7 +93,7 @@ const useDetailScreen = (item: SW_Entity) => {
         );
       case 'Person':
         return (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.alignCenter}>
             {item.height && <Paragraph>height: {item.height}</Paragraph>}
             {item.birthYear && (
               <Paragraph>Birth Year: {item.birthYear}</Paragraph>

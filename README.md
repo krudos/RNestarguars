@@ -23,6 +23,14 @@ brew tap wix/brew
 brew install applesimutils
 npm install -g detox-cli
 ```
+###run e2e test on iOS
+```
+yarn e2e:build
+yarn e2e:test
+```
+
+###run e2e test on android
+TODO
 
 ##TODO
 implement timeout logic  
